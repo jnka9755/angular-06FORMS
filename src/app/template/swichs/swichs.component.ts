@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SwichsComponent implements OnInit {
 
+
+  public person = {
+    gender: '',
+    notifications: true
+  }
+
+  public termsConditions: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

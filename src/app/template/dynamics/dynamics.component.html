@@ -1,1 +1,58 @@
-<p>dynamics works!</p>
+<h2>Template: <small> Dinámicos </small> </h2>
+<hr>
+
+<form (ngSubmit)="save()" autocomplete="off" #gameForm="ngForm">
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control" placeholder="Nombre de la persona" [ngModel]="person.name"
+                    name="name" 
+                    required>
+            <span class="form-text text-danger" 
+                    *ngIf="gameForm.controls['name']?.errors && 
+                    gameForm.controls['name']?.touched"> Este campo es obligatorio</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control" placeholder="Agregar favorito" 
+                        [(ngModel)]="newGame" (keyup.enter)="addElement()" name="newGame">
+                <button class="btn btn-outline-primary" type="button"
+                        (click)="addElement()"> Agregar </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="input-group mb-1" 
+                *ngFor="let game of person.favorites; let i = index">
+                <input [(ngModel)]="game.name"
+                        name="nameGame_{{ i }}"
+                        class="form-control"
+                        required>
+                <button class="btn btn-outline-danger" type="button"
+                        (click)="deleteElement(i)"> Borrar </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary float-end" (click)="save()"
+                    [disabled]="gameForm.invalid">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<span> Perosna </span>
+<pre> {{ person | json }}</pre>
