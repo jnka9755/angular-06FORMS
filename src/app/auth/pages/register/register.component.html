@@ -1,0 +1,79 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="save()">
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="Nombre del usuario" formControlName="name">
+                    <span class="form-text text-danger" *ngIf="validateField('name')">El formato debe ser de nombre y apellido</span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Correo</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" placeholder="Correo del usuario" formControlName="email">
+                    <span class="form-text text-danger" *ngIf="validateField('email')">{{ spanEmail }}</span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Usuario</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="Código del usuario" formControlName="userName">
+                    <span class="form-text text-danger" *ngIf="validateField('userName')">El usuario no puede ser "jnka"</span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" placeholder="Contraseña del usuario" formControlName="password">
+                    <span class="form-text text-danger" *ngIf="validateField('password')">La contraseña debe de ser mayor a 6 caracteres</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar la contraseña</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" placeholder="Confirmar la contraseña del usuario" formControlName="repeatPassword">
+                    <span class="form-text text-danger" *ngIf="validateField('repeatPassword')">Las contraseñas deben ser iguales</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end" [disabled]="registerForm.pending">Crear usuario</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<h4>Form Valid: {{ registerForm.valid }}</h4>
+<h4>Form Status: {{ registerForm.status }}</h4>
+<h4>Form Pending: {{ registerForm.pending }}</h4>
+
+<br>
+<h5>Form Errors</h5>
+<pre>{{registerForm.errors | json }}</pre>
+
+<br>
+
+<h5>Nombre</h5>
+<pre>{{ registerForm.controls['name'].errors | json }}</pre>
+
+<h5>Correo</h5>
+<pre>{{ registerForm.controls['email'].errors | json }}</pre>
+
+<h5>Usuario</h5>
+<pre>{{ registerForm.controls['userName'].errors | json }}</pre>
+
+<h5>Contraseñas</h5>
+<pre>{{ registerForm.controls['password'].errors | json }}</pre>
+<pre>{{ registerForm.controls['repeatPassword'].errors | json }}</pre>
