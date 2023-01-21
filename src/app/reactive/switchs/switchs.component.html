@@ -1,7 +1,7 @@
 <h2>Reactivos: <small> Switchs </small></h2>
 <hr>
 
-<form>
+<form [formGroup]="personForm" (ngSubmit)="save()">
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label"> Género </label>
         <div class="col-sm-9">
@@ -10,7 +10,7 @@
                         type="radio" 
                         value="M"
                         id="radioM" 
-                        name="radioGender">
+                        formControlName="gender">
                 <label class="form-check-label" for="radioM"> Masculino</label> 
             </div>
 
@@ -19,7 +19,7 @@
                         type="radio" 
                         value="F"
                         id="radioF" 
-                        name="radioGender">
+                        formControlName="gender">
                 <label class="form-check-label" for="radioF"> Femenino</label>
             </div>
         </div>
@@ -31,6 +31,7 @@
             <div class="form-check form-switch mt-2">
                 <input class="form-check-input" 
                         type="checkbox"
+                        formControlName="notifications"
                         id="checkN">
                 <label class="form-check-label" for="checkN">Recibir notificaciones</label>
             </div>
@@ -42,7 +43,8 @@
         <div class="col-sm-9">
             <div class="form-check">
                 <input class="form-check-input" 
-                        type="checkbox" 
+                        type="checkbox"
+                        formControlName="termsConditions" 
                         id="checkTC">
                 <label class="form-check-label" for="checkTC">Términos y condiciones </label>
             </div>
@@ -52,12 +54,12 @@
 
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary float-end"> Guardar </button>
+            <button type="submit" class="btn btn-primary float-end"> Guardar </button>
         </div>
     </div>
 </form>
 
-<!-- <h5> Valor del formulario </h5>
+<h5> Valor del formulario </h5>
 <pre> {{ personForm.value | json }}</pre>
 <br>
 
@@ -69,7 +71,7 @@
 <pre>{{ personForm.valid }}</pre>
 <br>
 
-<h5> Terminos </h5>
+<!-- <h5> Terminos </h5>
 <pre>{{ personForm.controls['termsConditions']?.errors | json }}</pre>
 <br>
 
